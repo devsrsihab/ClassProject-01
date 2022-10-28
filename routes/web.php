@@ -20,6 +20,9 @@ Route::prefix('admin')->group(function () {
     
     // account Controller Route 
     Route::get('/dashboard', [dashboardController::class, 'index']);
-    
+
+    Route::controller(accountController::class)->group(function () {
+        Route::get('createAccount', 'index');
+    });
 
 });
