@@ -33,9 +33,7 @@
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-								<li class="{{ Request::is('admin/dashboard') ? 'active':'' }}"><a href="{{ url('admin/dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-								<li class="{{ Request::is('admin/account') ? 'active':'' }}"><a href="{{ url('admin/account') }}"><i class="icon-user-plus"></i> <span>Account</span></a></li>
-	
+								<li class=""><a href="{{ url('admin/dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								<!-- /main -->
 
 
