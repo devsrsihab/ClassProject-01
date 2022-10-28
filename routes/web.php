@@ -20,6 +20,6 @@ Route::prefix('admin')->group(function () {
     
     // account Controller Route 
     Route::get('/dashboard', [dashboardController::class, 'index']);
-
+ 
 
 });
