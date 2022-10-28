@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\batchController;
+use App\Http\Controllers\courseController;
 use App\Http\Controllers\admin\dashboardController;
-use App\Http\Controllers\admin\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,10 @@ Route::prefix('admin')->group(function () {
     
     // account Controller Route 
     Route::get('/dashboard', [dashboardController::class, 'index']);
+    // course Controller Route 
+    Route::get('/course', [courseController::class, 'index']);
+    // batch Controller Route 
+    Route::get('/course', [batchController::class, 'index']);
  
 
 });
