@@ -17,6 +17,8 @@ use App\Http\Controllers\admin\AccountController;
 
  
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [dashboardController::class,'index']);
-    Route::get('/account', [AccountController::class, 'index']);
+    
+    // account Controller Route 
+    Route::get('/dashboard', [dashboardController::class, 'index']);
+
 });
