@@ -1141,6 +1141,7 @@
                                                             <img class="avatar-img rounded-circle"
                                                                 src="{{ asset('frontend/assets/images/avatar/06.jpg') }}" alt="avatar">
                                                         </li>
+                                                        
                                                         <li class="avatar avatar-xs">
                                                             <div class="avatar-img rounded-circle bg-primary">
                                                                 <span
