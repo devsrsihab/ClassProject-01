@@ -23,7 +23,7 @@ use App\Http\Controllers\frontend\studentController;
 Route::get('/',[homeController::class, 'index']);
 
 // authenticate route
- 
+
 Route::controller(authController::class)->middleware('guest')->group(function () {
     Route::get('login','getLogin')->name('login');
     Route::post('login','loginAction')->name('login');
@@ -32,15 +32,15 @@ Route::controller(authController::class)->middleware('guest')->group(function ()
 });
 // admin routes
 Route::prefix('admin')->middleware('auth')->group(function () {
-    
-    // account Controller Route 
+
+    // account Controller Route
     Route::get('/dashboard', [dashboardController::class, 'index']);
-    // course Controller Route 
-    Route::controller(courseController::class)->group(function(){        
+    // course Controller Route
+    Route::controller(courseController::class)->group(function(){
         Route::get('/course',  'index');
         Route::get('/createCoure', 'create');
     });
-    // batch Controller Route 
+    // batch Controller Route
     Route::get('/batch', [batchController::class, 'index']);
 
 
@@ -58,3 +58,5 @@ Route::controller(studentController::class)->middleware('auth')->group(function 
 
 // comment by sihab
 // comment by devnurul
+// comment by sukhy
+
