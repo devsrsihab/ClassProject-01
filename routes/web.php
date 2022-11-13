@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\authController;
 use App\Http\Controllers\admin\batchController;
 use App\Http\Controllers\admin\courseController;
+use App\Http\Controllers\frontEnd\homeController;
 use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\frontend\studentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +19,39 @@ use App\Http\Controllers\admin\dashboardController;
 |
 */
 
+// home page route
+Route::get('/',[homeController::class, 'index']);
+
+// authenticate route
  
-Route::prefix('admin')->group(function () {
+Route::controller(authController::class)->middleware('guest')->group(function () {
+    Route::get('login','getLogin')->name('login');
+    Route::post('login','loginAction')->name('login');
+    Route::get('register','getRegister')->name('register');
+    Route::post('register','registerAction')->name('register');
+});
+// admin routes
+Route::prefix('admin')->middleware('auth')->group(function () {
     
     // account Controller Route 
     Route::get('/dashboard', [dashboardController::class, 'index']);
     // course Controller Route 
-    Route::get('/course', [courseController::class, 'index']);
+    Route::controller(courseController::class)->group(function(){        
+        Route::get('/course',  'index');
+        Route::get('/createCoure', 'create');
+    });
     // batch Controller Route 
     Route::get('/batch', [batchController::class, 'index']);
- 
 
+
+});
+
+// student dashboard
+Route::controller(studentController::class)->middleware('auth')->group(function (){
+
+    Route::get('studetn_dashoard','index');
+    // log out Controller Route
+    Route::controller(authController::class)->group(function(){
+        Route::get('logOut', 'logOut')->name('logOut');
+    });
 });
