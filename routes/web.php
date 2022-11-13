@@ -55,3 +55,5 @@ Route::controller(studentController::class)->middleware('auth')->group(function 
         Route::get('logOut', 'logOut')->name('logOut');
     });
 });
+
+// comment by sihab
