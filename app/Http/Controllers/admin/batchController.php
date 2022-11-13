@@ -9,6 +9,6 @@ class batchController extends Controller
 {
     public function index()
     {
-        return view('batch.index');
+        return view('admin.batch.index');
     }
 }
