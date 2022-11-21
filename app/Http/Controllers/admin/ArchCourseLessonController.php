@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Models\ArchCourseLesson;
 use App\Http\Controllers\Controller;
 
-class CourseController extends Controller
+class ArchCourseLessonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $Course['Courses'] = Course::all();
-        return view('admin.courseArch.index',$Course);
+        $ArvhiveCoursesLessions = ArchCourseLesson::join('courses', 'archive_courses.id', '=', 'archive_course_lessions.archive_course_id')->select('archive_course_lessions.*', 'archive_courses.name')->latest()->get();
+        $ArvhiveCoursesLessions = ArchCourseLesson::JOIN('arch_courses');
+        // $ArvhiveCoursesLessions = ArchiveCourseLession::latest()->get();
+        return view('admin.ArchCourseLesson.index',$ArvhiveCoursesLessions);
     }
 
     /**
@@ -26,7 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.courseArch.create');
+        return view('admin.ArchCourseLesson.create');
     }
 
     /**
@@ -42,14 +44,16 @@ class CourseController extends Controller
             'course_des' => 'required|max:231',
             'price' => 'required|numeric',
            ]);
-           Course::create([
-            'course_name' => $request->course_name,
-            'course_des'  => $request->course_des,
-            'price'       => $request->price
+           ArchCourseLesson::create([
+            'archive_course_id' => $request->archive_course_id,
+            'name'              => $request->name,
+            'resource'          => $request->resource,
+            'overview'          => $request->overview,
+            'created_by'        => $request->created_by
 
         ]);
-        Alert()->success('Course Archive Added','The Course Created Successfully');
-        return redirect()->route('Courses.index');
+        Alert()->success('Course Archive Lessone Added','The Course Archive Lessone Created Successfully');
+        return redirect('ArchCourseLesson');
 
     }
 
@@ -72,8 +76,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $Course['Courses'] = Course::find($id);
-        return view('admin.courseArch.edit',$Course);
+       
         
     }
 
@@ -86,32 +89,10 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'course_name' => 'required|max:109',
-            'course_des' => 'required|max:231',
-            'price' => 'required|max:109',
-           ]);
-           Course::find($id)->update([
-            'course_name' => $request->course_name,
-            'course_des'  => $request->course_des,
-            'price'       => $request->price
-
-        ]);
-        Alert()->success('Course Archive Updated','The Course Updated Successfully');
-        return redirect()->route('Courses.index');
+       
 
     }
 
-
-    /**
-     * Confirm Deleted SweetAlert
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function isDelete()
-    {
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -122,9 +103,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
        
-        Course::find($id)->delete();
-        Alert()->success('Course Deleted','The Course Deleted Successfully');
-        return redirect()->route('Courses.index');
+       
 
     }
 }

@@ -33,9 +33,12 @@
 							<ul class="navigation navigation-main navigation-accordion">
 								<!-- Main -->
 								<li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}"><a href="{{ url('admin/dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-								<li class="{{ Request::is('admin/course') ? 'active' : '' }}"><a href="{{ url('admin/course') }}"><i class=" icon-book"></i> <span>Course</span></a></li>
-								<li class="{{ Request::is('admin/batch') ? 'active' : '' }}"><a href="{{ url('admin/batch') }}"><i class="icon-price-tags2"></i> <span>Batch</span></a></li>
-								<li class="{{ Request::is('docs') ? 'active' : '' }}"><a href="{{ asset('docs') }}"><i class="icon-price-tags2"></i> <span>Docs</span></a></li>
+								{{-- Archives --}}
+								<li class="navigation-header"><span>Archives</span> <i class="icon-menu" title="" data-original-title="Forms"></i></li>
+								<li class="{{ Request::is('admin/Courses') ? 'active' : '' }}"><a href="{{ url('admin/Courses') }}"><i class=" icon-book"></i> <span>Course</span></a></li>
+
+								<li class="{{ Request::is('admin/ArchCourseLesson') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourseLesson') }}"><i class="icon-price-tags2"></i> <span>Lesson</span></a></li>
+				
 								<!-- /main -->
 
 

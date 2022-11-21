@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('frontend.layouts.app')
 @section('title','Home Page')
 @section('content')
   <!-- **************** MAIN CONTENT START **************** -->

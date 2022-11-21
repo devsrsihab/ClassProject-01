@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\authController;
-use App\Http\Controllers\admin\batchController;
-use App\Http\Controllers\admin\courseController;
+use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\frontEnd\homeController;
+use App\Http\Controllers\admin\AdminauthController;
 use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\admin\CourseArchController;
 use App\Http\Controllers\frontend\studentController;
+use App\Http\Controllers\admin\ArchCourseLessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,27 +23,42 @@ use App\Http\Controllers\frontend\studentController;
 
 // home page route
 Route::get('/',[homeController::class, 'index']);
+Route::get('/home',[homeController::class, 'index']);
 
-// authenticate route
-
+// normal user auth route
 Route::controller(authController::class)->middleware('guest')->group(function () {
     Route::get('login','getLogin')->name('login');
     Route::post('login','loginAction')->name('login');
     Route::get('register','getRegister')->name('register');
     Route::post('register','registerAction')->name('register');
 });
-// admin routes
-Route::prefix('admin')->middleware('auth')->group(function () {
 
-    // account Controller Route
-    Route::get('/dashboard', [dashboardController::class, 'index']);
-    // course Controller Route
-    Route::controller(courseController::class)->group(function(){
-        Route::get('/course',  'index');
-        Route::get('/createCoure', 'create');
-    });
-    // batch Controller Route
-    Route::get('/batch', [batchController::class, 'index']);
+// admin auth route
+Route::controller(AdminauthController::class)->group(function () {
+    Route::get('AminLogin','getLogin')->name('AminLogin');
+    Route::post('AminLogin','loginAction')->name('AminLogin');
+    Route::get('AdminRegister','getRegister')->name('AdminRegister');
+    Route::post('AdminRegister','registerAction')->name('AdminRegister');
+    Route::get('AdminLogout','logOut')->name('AdminLogout');
+});
+
+
+// admin routes
+Route::prefix('admin')->middleware('adminAuth')->group(function () {
+
+    //  dashboard
+    Route::get('dashboard',[App\Http\Controllers\admin\Dashboard::class,'index']);
+    // CourseArchive Route 
+    Route::resource('Courses', CourseController::class);
+
+    // Archive Course Lesson Route
+    Route::controller(ArchCourseLessonController::class)->group(function () {
+    Route::get('ArchCourseLesson','index');
+    Route::get('ArchCourseLesson/Create','create');
+    Route::post('ArchCourseLesson/Store','store');
+    Route::post('ArchCourseLesson/Edit','edit');
+    Route::get('ArchCourseLesson/Update','update');
+});
 
 
 });

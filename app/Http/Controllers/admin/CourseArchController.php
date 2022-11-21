@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Course;
+use App\Models\course;
 use Illuminate\Http\Request;
+use App\Models\CourseArchive;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
-class CourseController extends Controller
+class CourseArchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +18,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $Course['Courses'] = Course::all();
-        return view('admin.courseArch.index',$Course);
+        $courseArchive['courseArchives'] = CourseArchive::all();
+        return view('admin.courseArch.index',$courseArchive);
     }
 
     /**
@@ -42,14 +45,14 @@ class CourseController extends Controller
             'course_des' => 'required|max:231',
             'price' => 'required|numeric',
            ]);
-           Course::create([
+           CourseArchive::create([
             'course_name' => $request->course_name,
             'course_des'  => $request->course_des,
             'price'       => $request->price
 
         ]);
         Alert()->success('Course Archive Added','The Course Created Successfully');
-        return redirect()->route('Courses.index');
+        return redirect()->route('CourseArchives.index');
 
     }
 
@@ -72,8 +75,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $Course['Courses'] = Course::find($id);
-        return view('admin.courseArch.edit',$Course);
+        $CourseArchives['CourseArchivesEdit'] = CourseArchive::find($id);
+        return view('admin.courseArch.edit',$CourseArchives);
         
     }
 
@@ -91,14 +94,14 @@ class CourseController extends Controller
             'course_des' => 'required|max:231',
             'price' => 'required|max:109',
            ]);
-           Course::find($id)->update([
+           CourseArchive::find($id)->update([
             'course_name' => $request->course_name,
             'course_des'  => $request->course_des,
             'price'       => $request->price
 
         ]);
         Alert()->success('Course Archive Updated','The Course Updated Successfully');
-        return redirect()->route('Courses.index');
+        return redirect()->route('CourseArchives.index');
 
     }
 
@@ -122,9 +125,9 @@ class CourseController extends Controller
     public function destroy($id)
     {
        
-        Course::find($id)->delete();
+        CourseArchive::find($id)->delete();
         Alert()->success('Course Deleted','The Course Deleted Successfully');
-        return redirect()->route('Courses.index');
+        return redirect()->route('CourseArchives.index');
 
     }
 }

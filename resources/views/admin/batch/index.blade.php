@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('breadcrumb','Batch')
 @section('title','Batch')
 @section('content')

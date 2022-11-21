@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>@yield('title')</title>
 
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 	<link href="{{ asset('backend/assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
@@ -26,7 +28,7 @@
 <body>
 
 	<!-- Main navbar -->
-       @include('layouts.inc.adminNavbar')
+       @include('admin.layouts.inc.adminNavbar')
 	<!-- /main navbar -->
 
 
@@ -37,7 +39,7 @@
 		<div class="page-content">
 
 			<!-- Main sidebar -->
-            @include('layouts.inc.adminSidebar')
+            @include('admin.layouts.inc.adminSidebar')
 			<!-- /main sidebar -->
 
 
@@ -81,20 +83,13 @@
 
 	</div>
 	<!-- /page container -->
-
-
-
-
-
-
-
-
-
+	
 
 
 <!-- Core JS files -->
-<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/loaders/pace.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('backend/assets/js/core/libraries/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/loaders/pace.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/js/core/libraries/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/js/plugins/loaders/blockui.min.js') }}"></script>
 <!-- /core JS files -->
@@ -108,9 +103,51 @@
 <script type="text/javascript" src="{{ asset('backend/assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/js/plugins/pickers/daterangepicker.js') }}"></script>
 
+<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('backend/assets/js/core/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/pages/datatables_basic.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/js/pages/dashboard.js') }}"></script>
+
 <!-- /theme JS files -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.min.js"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/notifications/bootbox.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/plugins/notifications/sweet_alert.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/assets/js/pages/components_modals.js') }}"></script>
+{{-- sweetalert --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('sweetalert::alert')
+
+{{-- custom  sscripts --}}
+<script>
+	    alert = function() {};
+		function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');  
+        console.log(urlToRedirect); 
+        swal({
+            title: "Are you sure to cancel this product",
+            text: "You will not be able to revert this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willCancel) => {
+            if (willCancel) {
+
+
+                 
+                window.location.href = urlToRedirect;
+               
+            }  
+
+
+        });
+
+        
+    }
+</script>
+@yield('script')
 </body>
 </html>
