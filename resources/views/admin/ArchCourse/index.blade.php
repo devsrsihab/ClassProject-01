@@ -45,7 +45,7 @@
 									<ul class="icons-list text-center">
 									<LI class="mr-5"><a href="{{ url('admin/ArchCourses/Edit/'.$ArchiveCourse->id) }}" class=" icon-pencil3 "></a>
 									</LI>
-									<LI style="cursor:pointer" class="mr-5 courseArchiveDelete"><span href="" class="icon-trash"> <input type="hidden" id="delete_Archcourse_id" value="{{ $ArchiveCourse->id }}"></span>
+									<LI style="cursor:pointer" class="mr-5 courseArchiveDelete"><span class="icon-trash"> <input type="hidden" id="delete_Archcourse_id" value="{{ $ArchiveCourse->id }}"></span>
 									</LI>
 									</ul>
 								</td>
