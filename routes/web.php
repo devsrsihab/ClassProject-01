@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\frontEnd\homeController;
 use App\Http\Controllers\admin\AdminauthController;
 use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\admin\ArchCourseController;
 use App\Http\Controllers\admin\CourseArchController;
 use App\Http\Controllers\frontend\studentController;
 use App\Http\Controllers\admin\ArchCourseLessonController;
@@ -50,6 +51,19 @@ Route::prefix('admin')->middleware('adminAuth')->group(function () {
     Route::get('dashboard',[App\Http\Controllers\admin\Dashboard::class,'index']);
     // CourseArchive Route 
     Route::resource('Courses', CourseController::class);
+
+    // Archive Course Route
+    Route::controller(ArchCourseController::class)->group(function () {
+    Route::get('ArchCourses','index');
+    Route::get('ArchCourses/Create','create');
+    Route::post('ArchCourses/Store','store');
+    Route::get('ArchCourses/Edit/{id}','edit');
+    Route::post('ArchCourses/Update/{id}','update');
+    Route::get('ArchCourses/Delete/{id}','destroy');
+    // Route::get('/editPost/{post_id}',[PostController  ::class,'edit']);
+    // Route::PUT('/updatePost/{post_id}',[PostController::class,'update']);
+    // Route::get('/deletePost/{post_id}',[PostController::class, 'delete']);
+    });
 
     // Archive Course Lesson Route
     Route::controller(ArchCourseLessonController::class)->group(function () {

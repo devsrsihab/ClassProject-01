@@ -16,7 +16,7 @@ class CourseController extends Controller
     public function index()
     {
         $Course['Courses'] = Course::all();
-        return view('admin.courseArch.index',$Course);
+        return view('admin.Course.index',$Course);
     }
 
     /**
@@ -26,7 +26,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.courseArch.create');
+        return view('admin.Course.create');
     }
 
     /**
@@ -73,7 +73,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $Course['Courses'] = Course::find($id);
-        return view('admin.courseArch.edit',$Course);
+        return view('admin.Course.edit',$Course);
         
     }
 

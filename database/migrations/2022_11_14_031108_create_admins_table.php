@@ -25,7 +25,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        
+        DB::table('admins')->insert(
+            array('id'=>2, 'name'=>'md.admin', 'email'=>'mdadmin@gmail.com',
+                 'password'=>Hash::make('12345678'),'email_verified_at'=>null));
     }
 
     /**
