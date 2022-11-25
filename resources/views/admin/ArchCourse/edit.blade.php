@@ -54,12 +54,14 @@
                         <div class="col-lg-10">
                               <select name="valid" id="valid" class="form-control">
                                         @if ($ArchiveCourses->valid == 1)
-                                            <option value="1">Active</option>
-                                        @else
+                                            <option selected value="1">Active</option>
                                             <option value="0">in Active</option>
+
+                                        @else
+                                            <option selected value="0">in Active</option>
+                                            <option value="1">Active</option>
+
                                         @endif
-                                        <option value="0">in Active</option>
-                                        <option value="1">Active</option>
                                     </select>
                         </div>
                     </div>

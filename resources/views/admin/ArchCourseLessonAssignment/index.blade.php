@@ -10,7 +10,7 @@
             <h4>Create Course</h4>
         </div>
         <div class="col-md-6 text-right ">
-            <a href="{{ url('admin/ArchCourses/Create') }}" class="btn btn-primary"  > Create a Lesson</a>
+            <a href="{{ url('admin/ArchCourseLessonAssignment/create') }}" class="btn btn-primary"  > Create a Lesson</a>
         </div>
     </div>{{-- /course archive header --}}
 
@@ -23,30 +23,43 @@
 						<table class="table datatable-basic">
 							<thead>
 								<tr>
+									<th>SL</th>
+									<th>Lession Name</th>
 									<th>Course Name</th>
-									<th>Course Description</th>
+									<th>Title</th>
+									<th>Description</th>
 									<th>Status</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-							 @if (!@empty($ArchiveCourses))
-							 @foreach ($ArchiveCourses as $key => $ArchiveCourse )
+							 @if (!@empty($ArchCourseLessonAssignments))
+							 @foreach ($ArchCourseLessonAssignments as $key => $ArchCourseLessonAssignment )
 							 <tr>
-								<td{{ ++$key }}</td>
-								<td>{{ $ArchiveCourse->arch_name }}</td>
-								<td>{{ $ArchiveCourse->arch_description }}</td>
-								<td>@if ($ArchiveCourse->valid == 1)
+								<td>{{ ++$key }}</td>
+								<td>{{ $ArchCourseLessonAssignment->name }}</td>
+								<td>{{ $ArchCourseLessonAssignment->arch_name }}</td>
+								<td>{{ $ArchCourseLessonAssignment->title }}</td>
+								<td>{{ $ArchCourseLessonAssignment->details }}</td>
+								<td>@if ($ArchCourseLessonAssignment->valid == 1)
 									<span class="label label-success">Active</span>
 								@else
 								<span class="label label-danger">InActive</span>
-								@endif</td>
-								<td>
+								@endif</td>								<td>
 									<ul class="icons-list text-center">
-									<LI class="mr-5"><a href="{{ url('admin/ArchCourses/Edit/'.$ArchiveCourse->id) }}" class=" icon-pencil3 "></a>
+									<LI class="mr-5"><a href="{{ url('admin/ArchCourseLessonAssignment/'.$ArchCourseLessonAssignment->id.'/edit') }}" class="icon-pencil3"></a>
 									</LI>
-									<LI class="mr-5 courseArchiveDelete"><a class="icon-trash"> <input type="hidden" id="delete_Archcourse_id" value="{{ $ArchiveCourse->id }}"></a>
-									</LI>
+									<LI class="mr-5">
+									<form action="{{ url('admin/ArchCourseLessonAssignment/'.$ArchCourseLessonAssignment->id) }}" method="POST">
+										@csrf
+										@method('DELETE')
+										<button type="submit"><i  class="icon-trash "> </i></button>
+										</form>
+									</LI>									
+									{{-- <LI class="mr-5"><a class="icon-trash courseArchLessonAssignmentDelete"> 
+										<input type="hidden" id="delete_Archcourse_lesson_assignment_id" value="{{ $ArchCourseLessonAssignment->id }}"> 
+									</a>
+									</LI> --}}
 									</ul>
 								</td>
 							</tr>
@@ -69,9 +82,9 @@
 	$(document).ready(function () {
 
 
-		$('.courseArchiveDelete').click(function (e) {
+		$('.courseArchLessonAssignmentDelete').click(function (e) {
 			e.preventDefault();
-			let delete_Archcourse_id = $('#delete_Archcourse_id').val();
+			let delete_ArchcourseLessonAssignment_id = $('#delete_Archcourse_lesson_assignment_id').val();
 			Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -90,14 +103,14 @@
 			});
 		    	$.ajax({
 					type: "GET",
-					url: "ArchCourses/Delete/"+delete_Archcourse_id,
+					url: "ArchCourseLessonAssignment/"+delete_ArchcourseLessonAssignment_id,
 					success: function (response) {
 						location.reload()
 					}
 				});
 				Swal.fire(
 				'Deleted!',
-				'Your file has been deleted.',
+				'Your A.C.L Assignment has been deleted.',
 				'success'
 				)
 			}
@@ -105,5 +118,4 @@
 		});
 	});
 </script>
-	
 @endsection

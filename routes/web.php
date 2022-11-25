@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ArchCourseController;
 use App\Http\Controllers\admin\CourseArchController;
 use App\Http\Controllers\frontend\studentController;
 use App\Http\Controllers\admin\ArchCourseLessonController;
+use App\Http\Controllers\admin\ArchCourseLessonAssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,9 +61,6 @@ Route::prefix('admin')->middleware('adminAuth')->group(function () {
     Route::get('ArchCourses/Edit/{id}','edit');
     Route::post('ArchCourses/Update/{id}','update');
     Route::get('ArchCourses/Delete/{id}','destroy');
-    // Route::get('/editPost/{post_id}',[PostController  ::class,'edit']);
-    // Route::PUT('/updatePost/{post_id}',[PostController::class,'update']);
-    // Route::get('/deletePost/{post_id}',[PostController::class, 'delete']);
     });
 
     // Archive Course Lesson Route
@@ -70,9 +68,14 @@ Route::prefix('admin')->middleware('adminAuth')->group(function () {
     Route::get('ArchCourseLesson','index');
     Route::get('ArchCourseLesson/Create','create');
     Route::post('ArchCourseLesson/Store','store');
-    Route::post('ArchCourseLesson/Edit','edit');
-    Route::get('ArchCourseLesson/Update','update');
+    Route::get('ArchCourseLesson/Edit/{id}','edit');
+    Route::post('ArchCourseLesson/Update/{id}','update');
+    Route::get('ArchCourseLesson/Delete/{id}','destroy');
 });
+
+    // Archive Course Assignment Route
+    Route::resource('ArchCourseLessonAssignment', ArchCourseLessonAssignmentController::class);
+
 
 
 });

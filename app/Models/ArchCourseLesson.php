@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ArchCourse;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ArchCourseLesson extends Model
 {
@@ -14,6 +15,17 @@ class ArchCourseLesson extends Model
         'name',
         'resource',
         'overview',
-        'created_by'
+        'created_by',
+        'valid'
     ];
+
+    public function ArchCourses()
+    {
+        return $this->belongsTo(ArchCourse::class,'archive_course_id','id');
+    }
+    public function ArchCoursesLessonAssignment()
+    {
+        return $this->hasMany(ArchCourseLessonAssignment::class,'archive_course_id','id');
+    }
 }
+

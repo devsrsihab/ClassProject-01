@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('arch_courses', function (Blueprint $table) {
+        Schema::create('arch_course_lesson_assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('arch_name');
-            $table->text('arch_description')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();;
+            $table->unsignedBigInteger('archive_course_id')->comment('FK = archive_courses.id');
+            $table->unsignedBigInteger('archive_course_lession_id')->comment('FK = archive_course_lessions.id');
+            $table->string('title');
+            $table->text('details')->nullable();
+            $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('deleted_by')->nullable();
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arch_courses');
+        Schema::dropIfExists('arch_course_lesson_assignments');
     }
 };

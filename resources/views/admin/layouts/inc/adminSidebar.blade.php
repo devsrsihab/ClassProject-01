@@ -35,9 +35,11 @@
 								<li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}"><a href="{{ url('admin/dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								{{-- Archives --}}
 								<li class="navigation-header"><span>Archives</span> <i class="icon-menu" title="" data-original-title="Forms"></i></li>
-								<li class="{{ Request::is('admin/ArchCourses') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourses') }}"><i class=" icon-book"></i> <span>Course</span></a></li>
+								<li class="{{ Request::is('admin/ArchCourses') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourses') }}"><i class=" icon-archive"></i> <span>Course</span></a></li>
 
-								<li class="{{ Request::is('admin/ArchCourseLesson') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourseLesson') }}"><i class="icon-price-tags2"></i> <span>Lesson</span></a></li>
+								<li class="{{ Request::is('admin/ArchCourseLesson') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourseLesson') }}"><i class="icon-book"></i> <span>Lesson</span></a></li>
+
+								<li class="{{ Request::is('admin/ArchCourseLessonAssignment') ? 'active' : '' }}"><a href="{{ url('admin/ArchCourseLessonAssignment') }}"><i class=" icon-clipboard2"></i> <span>Assignment</span></a></li>
 				
 								<!-- /main -->
 

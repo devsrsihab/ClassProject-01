@@ -23,26 +23,33 @@
 						<table class="table datatable-basic">
 							<thead>
 								<tr>
-									<th>Course Name</th>
-									<th>Course Description</th>
-									<th>Price</th>
+									<th>SL</th>
+									<th>Lession Name</th>
+									<th>Courses Name</th>
+									<th>Overview</th>
+									<th>Recource</th>
 									<th>Status</th>
 									<th class="text-center">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-							 @if (!empty($ArchCourseLessones))
-							 @foreach ($ArchCourseLessones as $key $$ArchCourseLessone )
+							 @if (!@empty($ArvhiveCoursesLessions))
+							 @foreach ($ArvhiveCoursesLessions as $key => $ArvhiveCoursesLession )
 							 <tr>
-								<td{{ >++$key }}</td>
-								<td>$ArchCourseLessone</td>
-								<td>ss</td>
-								<td>ss</td>
-								<td>
+								<td>{{ ++$key }}</td>
+								<td>{{ $ArvhiveCoursesLession->name }}</td>
+								<td>{{ $ArvhiveCoursesLession->arch_name }}</td>
+								<td>{{ $ArvhiveCoursesLession->overview }}</td>
+								<td>{{ $ArvhiveCoursesLession->resource }}</td>
+								<td>@if ($ArvhiveCoursesLession->valid == 1)
+									<span class="label label-success">Active</span>
+								@else
+								<span class="label label-danger">InActive</span>
+								@endif</td>								<td>
 									<ul class="icons-list text-center">
-									<LI class="mr-5"><a href="{{ url('CourseArchives/edit') }}" class=" icon-pencil3 "></a>
+									<LI class="mr-5"><a href="{{ url('admin/ArchCourseLesson/Edit/'.$ArvhiveCoursesLession->id) }}" class=" icon-pencil3 "></a>
 									</LI>
-									<LI class="mr-5"><a href="{{ url('CourseArchives/destroy') }}" class="icon-trash"></a>
+									<LI class="mr-5"><a class="icon-trash courseArchiveDelete"> <input type="hidden" id="delete_Archcourse_id" value="{{ $ArvhiveCoursesLession->id }}"> </a>
 									</LI>
 									</ul>
 								</td>
@@ -65,11 +72,10 @@
 <script>
 	$(document).ready(function () {
 
-		$('.courseArchive').click(function (e) {
+
+		$('.courseArchiveDelete').click(function (e) {
 			e.preventDefault();
-			let destroy_id = $(this).closest('tr').find('.courseArchive_Delete_id').val();
-
-
+			let delete_ArchcourseLessone_id = $('#delete_Archcourse_id').val();
 			Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -79,7 +85,20 @@
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Yes, delete it!'
 			}).then((result) => {
+
 			if (result.isConfirmed) {
+				$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		    	$.ajax({
+					type: "GET",
+					url: "ArchCourseLesson/Delete/"+delete_ArchcourseLessone_id,
+					success: function (response) {
+						location.reload()
+					}
+				});
 				Swal.fire(
 				'Deleted!',
 				'Your file has been deleted.',
@@ -90,5 +109,4 @@
 		});
 	});
 </script>
-	
 @endsection

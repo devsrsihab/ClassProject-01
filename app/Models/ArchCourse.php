@@ -14,4 +14,14 @@ class ArchCourse extends Model
         'arch_description',
         'valid'
     ];
+    // public function ArchCoursesLesson()
+    // {
+    //     return $this->hasMany(ArchCourseLesson::class,'archive_course_id','id');
+    // }
+    // public function ArchCoursesLessonAssignment()
+    // {
+    //     return $this->hasMany(ArchCourseLessonAssignment::class,'archive_course_id','id');
+    // }
+
 }
+

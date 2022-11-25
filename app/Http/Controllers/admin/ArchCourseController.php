@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\ArchCourse;
 use Illuminate\Http\Request;
+use App\Models\ArchCourseLesson;
 use App\Http\Controllers\Controller;
 
 class ArchCourseController extends Controller
@@ -74,10 +75,12 @@ class ArchCourseController extends Controller
      */
     public function edit($id)
     {
+        
+        
         $ArchiveCourses['ArchiveCourses'] = ArchCourse::find($id);
         return view('admin.ArchCourse.edit',$ArchiveCourses);
 
-        
+
     }
 
     /**
@@ -116,11 +119,14 @@ class ArchCourseController extends Controller
     public function destroy($id)
     {
         $ArchCourseDelete = ArchCourse::find($id);
+        ArchCourseLesson::find($id)->update([
+            'valid' => '0'
+        ]);
         $ArchCourseDelete->delete();
         return response()->json([
-            'status' => 200,
-            'message' => 'Deleted',
+            'status' => 200
         ]);
 
+        
     }
 }
