@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('frontend.layouts.app')
 @section('title','Student Dashboard')
 @section('content')
 	<!-- **************** MAIN CONTENT START **************** -->

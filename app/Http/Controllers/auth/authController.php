@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\auth;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +13,7 @@ class authController extends Controller
     // get login method
     public function getLogin()
     {
-       return view('auth.login');
+       return view('user.auth.login');
     }
 
     // loginAction method
@@ -49,7 +48,7 @@ class authController extends Controller
     // get Register method
     public function getRegister()
     {
-       return view('auth.register');
+       return view('user.auth.register');
     }
 
     // get Register Action method
